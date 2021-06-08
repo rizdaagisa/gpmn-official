@@ -99,9 +99,11 @@ def kartu_belakang(id):
         expire = now.strftime("%d-%m-")+str(tahun)
         image_editable.text((640,1116), expire, font=fontData, fill="#fff")
         im2.save("img/back/"+id+".jpg")
+        print("success","img/back/"+id+".jpg")
         # im2.show()
         return True
-    except:
+    except Exception as e:
+        print(e)
         return False
     
 def kartu_depan(result):
@@ -152,10 +154,12 @@ def kartu_depan(result):
         image_editable.text((570,1490), kota, (0, 0, 0),font=fontData)
         image_editable.text((570,1552), "Anggota "+status_anggota, (0, 0, 0),font=fontData)
         im2.save("img/front/"+id+".jpg")
+        print("success","img/front/"+id+".jpg")
         # im2.show()
         #========================================================================
         return True
-    except:
+    except Exception as e:
+        print(e)
         return False
 
 
