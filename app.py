@@ -10,18 +10,34 @@ import pyqrcode
 
 
 base = "https://gpmn-official.herokuapp.com/"
+base2 = "https://gpmn-official.com/"
 app = Flask(__name__)
+back_card = '/img/back'
+front_card = '/img/front'
+profile_img = '/img/profile'
+qr_img = '/img/qrcode'
+
+app.config['back_card'] = back_card
+app.config['front_card'] = front_card
+app.config['profile_img'] = profile_img
+app.config['qr_img'] = qr_img
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
 path = os.path.dirname(__file__)
-# b= os.listdir(path)
-# print(path)
+b= os.listdir(path)
+print(path)
+print(b)
+
 path = path.replace("\\","/")
 # os.environ['LD_LIBRARY_PATH'] = os.getcwd()
 
 def download_imagee(img):
-    url = "http://localhost/gpmn/assets/ktp/"+img
+    url = base2+"assets/ktp/"+img
     data = requests.get(url , stream=True)
     with open(img, 'wb') as out_file:
         shutil.copyfileobj(data.raw, out_file)
+        os.path.join(app.config['UPLOAD_FOLDER'], filename)
     # shutil.move(img, "img/profile/"+img)
     del data
     # return True
@@ -154,7 +170,7 @@ def kartu_depan(result):
         image_editable.text((570,1490), kota, (0, 0, 0),font=fontData)
         image_editable.text((570,1552), "Anggota "+status_anggota, (0, 0, 0),font=fontData)
         im2.save("img/front/"+id+".jpg")
-        print("success","img/front/"+id+".jpg")
+        print("success",base+"img/front/"+id+".jpg")
         # im2.show()
         #========================================================================
         return True
