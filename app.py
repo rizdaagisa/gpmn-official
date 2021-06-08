@@ -12,10 +12,10 @@ import pyqrcode
 base = "https://gpmn-official.herokuapp.com/"
 base2 = "https://gpmn-official.com/"
 app = Flask(__name__)
-back_card = '/img/back'
-front_card = '/img/front'
-profile_img = '/img/profile'
-qr_img = '/img/qrcode'
+back_card = '/static/back'
+front_card = '/static/front'
+profile_img = '/static/profile'
+qr_img = '/static/qrcode'
 
 app.config['back_card'] = back_card
 app.config['front_card'] = front_card
@@ -38,7 +38,7 @@ def download_imagee(img):
     with open(img, 'wb') as out_file:
         shutil.copyfileobj(data.raw, out_file)
         os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    # shutil.move(img, "img/profile/"+img)
+    # shutil.move(img, "static/profile/"+img)
     del data
     # return True
 
@@ -90,7 +90,7 @@ def kartu_belakang(id):
         url = pyqrcode.QRCode('http://localhost/profile.php?id='+id, error = 'H')
         url.png('qrcode.png',scale=8)
         im = Image.open('qrcode.png')
-        shutil.copy('qrcode.png', 'img/qrcode/'+id+'.png')
+        shutil.copy('qrcode.png', 'static/qrcode/'+id+'.png')
         im = im.convert("RGBA")
         logo = Image.open('logo.png')
         box = (140,140,240,240)
@@ -114,8 +114,8 @@ def kartu_belakang(id):
         tahun = int(now.strftime("%Y"))+1
         expire = now.strftime("%d-%m-")+str(tahun)
         image_editable.text((640,1116), expire, font=fontData, fill="#fff")
-        im2.save("img/back/"+id+".jpg")
-        print("success","img/back/"+id+".jpg")
+        im2.save("static/back/"+id+".jpg")
+        print("success","static/back/"+id+".jpg")
         # im2.show()
         return True
     except Exception as e:
@@ -135,9 +135,9 @@ def kartu_depan(result):
         image = Image.open(foto)
         im2 = square(image)
         im3 = add_corners(im2, 45)
-        im3.save("img/profile/"+id +'.png', 'PNG')
+        im3.save("static/profile/"+id +'.png', 'PNG')
         os.remove(foto)
-        im1 = Image.open("img/profile/"+id+".png")
+        im1 = Image.open("static/profile/"+id+".png")
 
         #================== Resize =========================
         basewidth = 525
@@ -169,8 +169,8 @@ def kartu_depan(result):
         image_editable.text((570,1430), alamat, (0, 0, 0),font=fontData)
         image_editable.text((570,1490), kota, (0, 0, 0),font=fontData)
         image_editable.text((570,1552), "Anggota "+status_anggota, (0, 0, 0),font=fontData)
-        im2.save("img/front/"+id+".jpg")
-        print("success",base+"img/front/"+id+".jpg")
+        im2.save("static/front/"+id+".jpg")
+        print("success",base+"static/front/"+id+".jpg")
         # im2.show()
         #========================================================================
         return True
@@ -221,8 +221,8 @@ def index():
         if((depan == True) and (belakang == True)):
             data = {
                 "result" : "ok",
-                "kartu_depan" : base+"img/front/"+result['no_anggota']+".jpg",
-                "kartu_belakang" : base+"img/back/"+result['no_anggota']+".jpg"
+                "kartu_depan" : base+"static/front/"+result['no_anggota']+".jpg",
+                "kartu_belakang" : base+"static/back/"+result['no_anggota']+".jpg"
             }
             return data
         else:
