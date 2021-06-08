@@ -9,7 +9,7 @@ import textwrap
 import pyqrcode
 
 
-base = "https://gpmn-herokuapp.com/"
+base = "https://gpmn-official.herokuapp.com/"
 app = Flask(__name__)
 path = os.path.dirname(__file__)
 # b= os.listdir(path)
@@ -209,6 +209,6 @@ def index():
             return {'result' : 'failed'}
 
 if __name__ == '__main__':
-    # port = int(os.environ.get("PORT", 5000))
-    # app.run(host="0.0.0.0", port=port)
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+    # app.run(debug=True)
