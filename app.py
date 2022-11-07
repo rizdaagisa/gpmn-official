@@ -221,8 +221,8 @@ def index():
         if((depan == True) and (belakang == True)):
             data = {
                 "result" : "ok",
-                "kartu_depan" : base+"static/front/"+result['no_anggota']+".jpg",
-                "kartu_belakang" : base+"static/back/"+result['no_anggota']+".jpg"
+                "front" : base+"static/front/"+result['no_anggota']+".jpg",
+                "back" : base+"static/back/"+result['no_anggota']+".jpg"
             }
             return data
         else:
