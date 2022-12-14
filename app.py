@@ -10,11 +10,7 @@ import pyqrcode
 
 
 base = "https://gpmn-official.herokuapp.com/"
-base = "https://gpmn-server.herokuapp.com/"
-
 base2 = "https://gpmn-official.com/"
-base2 = "http://localhost/gpmn/"
-
 app = Flask(__name__)
 back_card = '/static/back'
 front_card = '/static/front'
